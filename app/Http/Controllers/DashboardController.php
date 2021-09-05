@@ -28,7 +28,7 @@ class DashboardController extends Controller
     {
         $students = DB::table('students')->get();
         return view('studentdata',compact('students'))
-        ->with('i',(request()->input('page',1)-1)*5);
+        ->with('id',(request()->input('page',1)-1)*5);
     }
     public function storeStudent(Request $request)
     {
@@ -50,9 +50,10 @@ class DashboardController extends Controller
         return view('studentmydata');
     }
 
-    public function studentedit()
+    public function studentedit($id)
     {
-        return view('studentedit');
+        $students = DB::table('students')->where('id',$id)->first();
+        return view('studentedit',compact('students'));
     }
     public function studentcreate()
     {
@@ -62,4 +63,23 @@ class DashboardController extends Controller
     {
         return view('studentshow');
     }
+    public function updateStudent(Request $request)
+    {
+        DB::table('students')->where('id',$request->id)->update([
+            'first_name' => $request -> first_name,
+            'last_name' => $request -> last_name
+        ]);
+        return redirect()->route('dashboard.studentdata')
+
+        ->with('success','Student updated successfully.');
+    }
+    public function destroyStudent($id)
+    {
+        DB::table('students')->where('id',$id)->delete();
+
+        return redirect()->route('dashboard.studentdata')
+
+        ->with('success','Student Deleted Successfully.');
+    }
+    
 }

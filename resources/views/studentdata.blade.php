@@ -14,6 +14,9 @@
                     {{ __('Create new student') }}
                     </a>
                 </x-button><br><br>
+                @if (Session::has('studentdelete'))
+                    <span>{{Session::get('studentdelete')}}</span>
+                @endif
                 @if($message=Session::get('success'))
 
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
@@ -45,7 +48,7 @@
             @foreach($students as $student)
         <tr>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {{++$i}}
+                {{++$id}}
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {{$student->first_name}}
@@ -54,7 +57,19 @@
                 {{$student->last_name}}
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                
+              <x-button class="mr-1 ">
+                    <a href="studentedit/{{$student->id}}">
+                    Edit
+                    </a>
+              </x-button>
+              <x-button class="mr-1 ">
+                    <a href="studentdelete/{{$student->id}}">
+                    Delete
+                    </a>
+              </x-button>
+
+            
+            </form>
               </th>
         </tr>
           @endforeach

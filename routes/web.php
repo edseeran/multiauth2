@@ -31,19 +31,24 @@ Route::group(['middleware' => ['auth', 'role:admin']],function() {
 
 });
 
-//for prof
+//for prof and admin
 Route::group(['middleware' => ['auth','role:professor|admin']],function() {
     Route::get('/dashboard/studentdata','App\Http\Controllers\DashboardController@studentdata')->name
     ('dashboard.studentdata');
     Route::get('/dashboard/studentcreate','App\Http\Controllers\DashboardController@studentcreate')->name
     ('dashboard.studentcreate');
-    Route::get('/dashboard/studentedit','App\Http\Controllers\DashboardController@studentedit')->name
-    ('dashboard.studentedit');
+    
     Route::get('/dashboard/studentshow','App\Http\Controllers\DashboardController@studentshow')->name
     ('dashboard.studentshow');
     
+    Route::get('/dashboard/studentedit/{id}','App\Http\Controllers\DashboardController@studentedit')->name
+    ('dashboard.studentedit');
     Route::post('/dashboard/studentcreate', [DashboardController::class,'storeStudent'])->name
     ('dashboard.storeStudent');
+    Route::post('/dashboard/studentcreate', [DashboardController::class,'updateStudent'])->name
+    ('dashboard.updateStudent');
+    Route::get('/dashboard/studentdelete/{id}', [DashboardController::class,'destroyStudent'])->name
+    ('dashboard.destroyStudent');
 
 });
 
