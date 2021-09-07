@@ -11,12 +11,13 @@
                 
                 <div class="p-6 bg-white border-b border-gray-200">
                 <div class="col-span-6 sm:col-span-3">
-                    @if (Session::has('studentdata'))
-                    <span>{{Session::get('studentdata')}}</span>
+                    @if (Session::has('studentedit'))
+                    <span>{{Session::get('studentedit')}}</span>
                     @endif
-                    <form action="{{ route('dashboard.updateStudent') }}" method="POST">
+                    <form action="{{ route('dashboard.updateStudent') }}" method="post">
                         @csrf
-                    <input type="hidden" name="id" value="{{$students->id}}">
+
+                <input type="hidden" name="id" value="{{$students->id}}">
                 <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
                 <input type="text" name="first_name" id="first_name" value="{{$students->first_name}}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"><br>
                 <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>

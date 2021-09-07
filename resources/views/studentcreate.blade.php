@@ -11,19 +11,22 @@
                 
                 <div class="p-6 bg-white border-b border-gray-200">
                 <div class="col-span-6 sm:col-span-3">
-                    @if (Session::has('createstudent'))
-                    <span>{{Session::get('createstudent')}}</span>
-                    @endif
-                    <form action="{{ route('dashboard.storeStudent') }}" method="POST">
-                        @csrf
+                @if (Session::has('studentcreate'))
+                    <span>{{Session::get('studentcreate')}}</span>
+                @endif
+                    
+             <form action="{{ route('/dashboard/storeStudent') }}" method="post">
+                @csrf
+                    
                 <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
                 <input type="text" name="first_name" id="first_name" value="" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"><br>
                 <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
                 <input type="text" name="last_name" id="last_name" value="" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"><br>
-                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button type="submit" value="sumbit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Submit
                     </button>
-                    </form>
+                </form>
+                    
                 </div>
                 </div>
             </div>

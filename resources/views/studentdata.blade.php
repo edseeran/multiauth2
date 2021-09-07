@@ -17,6 +17,7 @@
                 @if (Session::has('studentdelete'))
                     <span>{{Session::get('studentdelete')}}</span>
                 @endif
+                
                 @if($message=Session::get('success'))
 
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
