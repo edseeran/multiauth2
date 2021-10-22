@@ -1,17 +1,28 @@
 <x-app-layout>
-    <x-slot name="header">
+<div class="row">
+<x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Students Data') }}
-        </h2>
-    </x-slot>
-
+        </h2>   
+        <div class="col-md-4">
+          <form action="searchStudent" method="get">
+          @csrf
+              <input type="search" name="search" class="form-control border-gray-300 rounded-md ">
+                <x-button type="submit">
+                  Search
+                </x-button>
+              </span>
+          </form>
+        </div> 
+</x-slot>
+</div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                 <x-button class="ml-3">
                     <a href="studentcreate">
-                    {{ __('Create new student') }}
+                    {{ ('Create new student') }}
                     </a>
                 </x-button><br><br>
                 @if (Session::has('studentdelete'))
@@ -29,7 +40,7 @@
               </div>
             </div><br>
                 @endif
-        <table class="min-w-full divide-y divide-gray-200 border-separate border border-black-100">
+        <table class="min-w-full divide-y divide-gray-200 border-separate border border-black-100" id="myTable">
           <thead class="bg-gray-50">
             <tr class="bg-gray-200">
               <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-black-500 uppercase tracking-wider">

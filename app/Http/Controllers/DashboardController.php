@@ -13,16 +13,15 @@ class DashboardController extends Controller
     {
         if(Auth::user()->hasRole('admin')){
             return view('admindash');
-        }elseif(Auth::user()->hasRole('professor')){
-            return view('profdash');
+
+         }elseif(Auth::user()->hasRole('professor')){
+                return view('profdash');
+        
         }elseif(Auth::user()->hasRole('student')){
             return view('studentdash');
         }
     }
-    public function profdata()
-    {
-        return view('profdata');
-    }
+    
 
     public function studentdata()
     {
@@ -70,6 +69,7 @@ class DashboardController extends Controller
     public function updateStudent(Request $request)
     {
         DB::table('students')->where('id',$request->id)->update([
+            'id' => $request -> id,
             'first_name' => $request -> first_name,
             'last_name' => $request -> last_name
         ]);
@@ -87,4 +87,15 @@ class DashboardController extends Controller
         ->with('success','Student Deleted Successfully.');
     }
     
+   public function searchStudent(Request $request)
+   {
+       $search = $request->get('search');
+       $students = DB::table('students')->where('first_name', 'LIKE', '%'.$search.'%')->orWhere('last_name', 'LIKE', '%'.$search.'%')->paginate(5);
+       return view('studentdata', ['students' => $students])->with('id');
+    }
+
+    public function inbox()
+    {
+        return view('inbox');
+    }
 }

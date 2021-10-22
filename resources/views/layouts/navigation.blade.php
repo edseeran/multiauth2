@@ -19,7 +19,7 @@
                 @if (Auth::user()->hasRole('admin'))
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.profdata')" :active="request()->routeIs('dashboard.profdata')">
+                    <x-nav-link :href="route('professor.profdata')" :active="request()->routeIs('professor.profdata')">
                         {{ __('Professors Data') }}
                     </x-nav-link>
 
@@ -76,6 +76,9 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        <x-dropdown-link :href="route('dashboard.inbox')">
+                            {{ __('Inbox')}}
+                        </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>
